@@ -26,10 +26,10 @@
         console.log(photoset);
 
         var title = photoset.title;
-        console.log("title: "+ title);
+        //console.log("title: "+ title);
 
         var owner = photoset.owner;
-        console.log("owner: "+ owner);
+        //console.log("owner: "+ owner);
 
         var pictures = [];
 
@@ -53,8 +53,8 @@
             });
         });
 
-        console.log("pictures: ");
-        console.log(pictures);
+        //console.log("pictures: ");
+        //console.log(pictures);
 
         $(el).html(template_carousel());
 
@@ -134,7 +134,7 @@
             if (response.hasOwnProperty("photoset")) {
                 render_gallery(el, response.photoset);
             } else {
-                console.log("no photoset found in response!");
+                alert("no photoset found in response!");
             }
         });
 
@@ -151,11 +151,10 @@
         $(".photoset-gallery").each(function (index, el){
             var photosetid = $(el).data("photoset");
             if (!photosetid) {
-                console.log("missing data-photoset found on: "+ el);
+                alert("missing data-photoset found on: "+ el);
                 return;
             }
-
-            console.log("photoset to recover: "+photosetid);
+            //console.log("photoset to recover: "+photosetid);
             display_gallery_for($(el), photosetid);
         });
 
