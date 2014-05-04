@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <style>
+.jcarousel-wrapper, .controls {
+    margin: 20px auto;
+    position: relative;
+    border: 10px solid #fff;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0 0 2px #999;
+    -moz-box-shadow: 0 0 2px #999;
+    box-shadow: 0 0 2px #999;
+    width: 40%;
+}
+
+/** Carousel **/
+
+.jcarousel {
+    position: relative;
+    overflow: hidden;
+}
+
+.jcarousel ul {
+    width: 20000em;
+    position: relative;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.jcarousel li {
+    float: left;
+    margin-right: 1px;
+}
+
+.jcarousel img {
+    max-height: 200px;
+}
+
+.jcarousel .loading {
+    text-align: center;
+    line-height: 90px; /* Fake vertical aligning */
+}
+
+.jcarousel-source {
+
+}
+
+.jcarousel-title {
+    font-weight: bold;
+    font-size: larger;
+    text-align: center;
+    padding: 4px;
+}
+
+#jcarousel-selected-image {
+    width: 100%;
+}
+
+/** Carousel Controls **/
+
+.jcarousel-control-prev,
+.jcarousel-control-next {
+    position: absolute;
+    top: 70px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    background: #4E443C;
+    color: #fff;
+    text-decoration: none;
+    text-shadow: 0 0 1px #000;
+    font: 24px/27px Arial, sans-serif;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+    -webkit-box-shadow: 0 0 2px #999;
+    -moz-box-shadow: 0 0 2px #999;
+    box-shadow: 0 0 2px #999;
+}
+
+.jcarousel-control-prev {
+    left: -50px;
+}
+
+.jcarousel-control-next {
+    right: -50px;
+}
+
+.jcarousel-control-prev:hover span,
+.jcarousel-control-next:hover span {
+    display: block;
+}
+
+.jcarousel-control-prev.inactive,
+.jcarousel-control-next.inactive {
+    opacity: .5;
+    cursor: default;
+}
+        </style>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div class="controls">
+            <b>Your Flickr API Key</b>
+            <input id="api_key" name="api_key" value=""/>
+            <input id="display-photoset-btn" type="button" value="Display"/>
+        </div>
+
+        <div class="photoset-gallery" data-photoset="72157606132043161"></div>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/jcarousel/0.3.1/jquery.jcarousel.min.js"></script>
+        <script src="js/jquery.photoset.gallery.js"></script>
+        <script>
+            $(document).ready(function () {
+
+                $("#display-photoset-btn").click(function(){
+                    var api_key = $("#api_key").val()
+                    var photoset_id = $("#photoset_id").val()
+                    console.log("api_key: " + api_key + " photoset_id: " + photoset_id);
+
+                    if (!api_key) {
+                        alert("Please enter an api key.");
+                        return;
+                    }
+
+                    $.photoset.gallery.init({
+                        api_key: api_key
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>
