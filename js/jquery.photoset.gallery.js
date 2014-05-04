@@ -10,14 +10,14 @@
 
     function template_carousel() {
         var t = "";
-        t += '<div class="jcarousel-wrapper">';
         t += '<div class="jcarousel-title"></div>';
+        t += '<div class="jcarousel-wrapper">';
+        t += '<a id="jcarousel-source" title="" href="#"><img id="jcarousel-selected-image" src=""/></a>';
         t += '<div class="jcarousel">';
         t += '    <div class="loading">Loading carousel items...</div>';
         t += '</div>';
         t += '<a href="#" class="jcarousel-control-prev">&lsaquo;</a>';
         t += '<a href="#" class="jcarousel-control-next">&rsaquo;</a>';
-        t += '<a id="jcarousel-source" title="" href="#"><img id="jcarousel-selected-image" src=""/></a>';
         t += '</div>';
         return t;
     }
