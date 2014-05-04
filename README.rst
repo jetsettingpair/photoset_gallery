@@ -10,8 +10,8 @@ Generates a gallery from a photoset on Flickr with links referring to the
 originals. This provides a JQuery plugin which uses the excellent JCarousel
 to manage the gallery side of things.
 
-Useage
-------
+Usage
+-----
 
 Clone the repository and open demo-gallery.html in a browser. You will need to
 provide your Flickr API key. Paste it into the input and press Display and you
