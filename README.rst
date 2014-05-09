@@ -23,7 +23,7 @@ should see:
 
 Multiple galleries and photos are supported on one page. The following snippet
 of code sets up the library to look for all elements with the classes
-"psgallery-set" and "psgallery-photo". This is only need once when the document
+"psgallery-set" and "psgallery-photo". This is only needed once when the document
 is ready.
 
 .. code-block:: javascript
@@ -63,7 +63,7 @@ what photo to use. In this case https://www.flickr.com/photos/oisinmulvihill/872
 Tumblr Integration
 ------------------
 
-I designed this to allow me to make curate a gallery on flickr and use it in
+I designed this to allow me to curate a gallery on flickr and use it in
 a blog post. I wanted people to go between Tumblr and Flickr so the smaller
 images in the blog post link to the originals on Flickr.
 
