@@ -21,6 +21,21 @@ should see:
     :width: 50%
     :align: center
 
+Multiple galleries and photos are supported on one page. The following snippet
+of code sets up the library to look for all elements with the classes
+"psgallery-set" and "psgallery-photo". This is only need once when the document
+is ready.
+
+.. code-block:: javascript
+
+    $.photoset.gallery.init({
+        api_key: "your api key from flickr"
+    });
+
+
+photoset gallery
+~~~~~~~~~~~~~~~~
+
 The HTML contains the following data-photoset attribute which tells the library
 what photoset to use. In this case this is my Channel Islands Flickr photoset
 https://www.flickr.com/photos/oisinmulvihill/sets/72157606132043161/
@@ -31,15 +46,29 @@ https://www.flickr.com/photos/oisinmulvihill/sets/72157606132043161/
     :
     etc
 
-Multiple galleries are supported on one page. The following snippet of code
-sets up the library to look for all elements with the class "psgallery-set".
-This is only need once when the document is ready.
 
-.. code-block:: javascript
+photo
+~~~~~
 
-    $.photoset.gallery.init({
-        api_key: api_key
-    });
+The HTML contains the following data-photo attribute which tells the library
+what photo to use. In this case https://www.flickr.com/photos/oisinmulvihill/8720572307
+
+.. code-block:: html
+
+    <div class="psgallery-photo" data-photo="8720572307"></div>
+    :
+    etc
+
+
+Tumblr Integration
+------------------
+
+I designed this to allow me to make curate a gallery on flickr and use it in
+a blog post. I wanted people to go between Tumblr and Flickr so the smaller
+images in the blog post link to the originals on Flickr.
+
+Comming Soon, I just need to put this library onto a friendly CDN and document
+the integration process.
 
 
 Dependancies

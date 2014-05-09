@@ -11,8 +11,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <style>
-.psgallery-wrapper, .controls {
+.psgallery-wrapper, .controls, .psgallery-wrapper {
     margin: 20px auto;
+    width: 40%;
+}
+
+.psgallery-wrapper, .controls {
     position: relative;
     border: 10px solid #fff;
     -webkit-border-radius: 5px;
@@ -21,8 +25,11 @@
     -webkit-box-shadow: 0 0 2px #999;
     -moz-box-shadow: 0 0 2px #999;
     box-shadow: 0 0 2px #999;
-    width: 40%;
 }
+
+.psgallery-photo {
+}
+
 
 /** Carousel **/
 
@@ -57,7 +64,7 @@
 .psgallery-source {
 }
 
-.psgallery-title {
+.psgallery-title, .psgallery-photo-title {
     font-weight: bold;
     font-size: larger;
     text-align: center;
@@ -118,13 +125,13 @@
 
         <div class="controls">
             <b>Your Flickr API Key</b>
-            <input id="api_key" name="api_key" value=""/>
+            <input id="api_key" name="api_key" value="79cdc0fb0c5b24b7446311ae2d82fdfe"/>
             <input id="display-photoset-btn" type="button" value="Display"/>
         </div>
 
-        <div class="psgallery-set" data-photoset="72157602319380691"></div>
+        <div class="psgallery-set" data-photoset="72157606132043161"></div>
 
-        <div class="psgallery-set" data-photoset="72157606132043161"></div-->
+        <div class="psgallery-photo" data-photo="8720572307"></div>
 
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/jcarousel/0.3.1/jquery.jcarousel.min.js"></script>

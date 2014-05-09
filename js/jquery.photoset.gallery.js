@@ -1,6 +1,5 @@
 /*jslint devel: true, maxerr: 100, browser: true, indent: 4 */
-/*
-*/
+/* Oisin Mulvihill, 2014-05-09. */
 ;(function ($) {
 
     var settings = {
@@ -91,7 +90,7 @@
         var html = '<ul>';
 
         $.each(pictures, function() {
-            html += '<li><img class="' + gallery_id + '-select-large" data-large="' + this.picture + '" src="' + this.thumbnail + '" alt="' + this.title + '"></a></li>';
+            html += '<li><img class="' + gallery_id + '-select-large" data-large="' + this.picture + '" src="' + this.thumbnail + '" alt="' + this.title + '"></li>';
         });
 
         html += '</ul>';
@@ -148,13 +147,61 @@
         });
     }
 
+    function template_photo(index, photo) {
+        // http://farm{id}.staticflickr.com/{server}/{id}_{secret}_[mstzb].jpg
+        var base = "http://farm" + photo.farm + ".staticflickr.com/" + photo.server + "/" + photo.id + "_" + photo.secret;
+        var owner = photo.owner.nsid;
+        var picture = base + "_z.jpg";
+        var title = photo.title._content || "";
+        var src = "http://www.flickr.com/photos/" + owner + "/" + photo.id;
+        var t = "";
+        t += '<div class="psgallery-photo-title">' + title + '</div>';
+        t += '<div id="' + index + '-photo" class="psgallery-wrapper">';
+        t += '<a class="psgallery-photo" href="' + src + '" title="' + title + '">';
+        t += '<img src="' + picture + '" alt="' + title + '"/>';
+        t += '</a></div>';
+
+        return t;
+    }
+
+    function render_photo(index, el, photo) {
+        //console.log(photo);
+        $(el).html(
+            template_photo(index, photo)
+        );
+    }
+
+    function display_image_for(index, el, photoid) {
+        var request = $.ajax({
+            url: settings.flickr_api,
+            data: {
+                method: "flickr.photos.getInfo",
+                api_key: settings.api_key,
+                photo_id: photoid,
+                format: "json",
+                nojsoncallback: 1
+            }
+        });
+
+        request.done(function (response) {
+            if (response.hasOwnProperty("photo")) {
+                render_photo(index, el, response.photo);
+            } else {
+                alert("no photoset found in response!");
+            }
+        });
+
+        request.fail(function( jqXHR, textStatus ) {
+            alert( "Request failed: " + textStatus );
+        });
+    }
+
     function init(options) {
         if (options) {
             $.extend(settings, options);
         }
 
-        // For each gallery attempt to recover and display the requested flickr
-        // photoset.
+        // Recovery all photosets and create galleries for them:
         $(".psgallery-set").each(function (index, el){
             var photosetid = $(el).data("photoset");
             if (!photosetid) {
@@ -163,6 +210,17 @@
             }
             //console.log("photoset to recover: "+photosetid);
             display_gallery_for(index, $(el), photosetid);
+        });
+
+        // Recovery and display all single image:
+        $(".psgallery-photo").each(function (index, el){
+            var photoid = $(el).data("photo");
+            if (!photoid) {
+                alert("missing data-photoset found on: "+ el);
+                return;
+            }
+            //console.log("photoset to recover: "+photosetid);
+            display_image_for(index, $(el), photoid);
         });
 
     }
