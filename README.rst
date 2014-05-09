@@ -1,7 +1,7 @@
 Photoset Gallery
 ================
 
-.. contents:
+.. contents::
 
 Introduction
 ------------
