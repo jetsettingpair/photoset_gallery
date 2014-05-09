@@ -81,10 +81,10 @@ In the demo I was using JQuery 2.1.0 and Carousel 0.3.1 over CDN:
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/psgallery/0.3.1/jquery.psgallery.min.js"></script>
 
-psgallery
+JCarousel
 ~~~~~~~~~
 
- * http://sorgalla.com/psgallery/
+ * http://sorgalla.com/JCarousel/
 
 
 License
