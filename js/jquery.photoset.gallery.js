@@ -112,8 +112,8 @@
                 var large = $(ele).data("large");
                 //console.log("change pic to: " + large);
                 $("#jcarousel-selected-image").attr("src", large);
-                $("#jcarousel-source").attr("title", pictures[0].title);
-                $("#jcarousel-source").attr("href", pictures[0].src);
+                $("#jcarousel-source").attr("title", pictures[index].title);
+                $("#jcarousel-source").attr("href", pictures[index].src);
             });
         });
     }
