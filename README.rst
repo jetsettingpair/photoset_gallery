@@ -7,7 +7,7 @@ Introduction
 ------------
 
 Generates a gallery from a photoset on Flickr with links referring to the
-originals. This provides a JQuery plugin which uses the excellent JCarousel
+originals. This provides a JQuery plugin which uses the excellent psgallery
 to manage the gallery side of things.
 
 Usage
@@ -27,10 +27,13 @@ https://www.flickr.com/photos/oisinmulvihill/sets/72157606132043161/
 
 .. code-block:: html
 
-    <div class="photoset-gallery" data-photoset="72157606132043161"></div>
+    <div class="psgallery-set" data-photoset="72157606132043161"></div>
+    :
+    etc
 
-The following snippet of code sets up the library to look for all elements with
-the class "photoset-gallery". I don't yet support more then one on a page
+Multiple galleries are supported on one page. The following snippet of code
+sets up the library to look for all elements with the class "psgallery-set".
+This is only need once when the document is ready.
 
 .. code-block:: javascript
 
@@ -47,12 +50,12 @@ In the demo I was using JQuery 2.1.0 and Carousel 0.3.1 over CDN:
 .. code-block:: html
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jcarousel/0.3.1/jquery.jcarousel.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/psgallery/0.3.1/jquery.psgallery.min.js"></script>
 
-JCarousel
+psgallery
 ~~~~~~~~~
 
- * http://sorgalla.com/jcarousel/
+ * http://sorgalla.com/psgallery/
 
 
 License

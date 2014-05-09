@@ -8,22 +8,28 @@
         api_key: ""
     };
 
-    function template_carousel() {
+    function template_carousel(carousel_id) {
         var t = "";
-        t += '<div class="jcarousel-title"></div>';
-        t += '<div class="jcarousel-wrapper">';
-        t += '<a id="jcarousel-source" title="" href="#"><img id="jcarousel-selected-image" src=""/></a>';
-        t += '<div class="jcarousel">';
-        t += '    <div class="loading">Loading carousel items...</div>';
+        t += '<div id="' + carousel_id + '-title" class="psgallery-title"></div>';
+        t += '<div id="' + carousel_id + '-wrapper" class="psgallery-wrapper">';
+        t += '<a id="' + carousel_id + '-source" class="psgallery-source" href="#">';
+        t += '<img id="' + carousel_id + '-selected-image" class="psgallery-selected-image" src=""/></a>';
+        t += '<div id="' + carousel_id + '-gallery" class="psgallery">';
+        t += '    <div class="loading">Loading gallery pictures...</div>';
         t += '</div>';
-        t += '<a href="#" class="jcarousel-control-prev">&lsaquo;</a>';
-        t += '<a href="#" class="jcarousel-control-next">&rsaquo;</a>';
+        t += '<a href="#" id="' + carousel_id + '-control-prev" class="psgallery-control-prev">&lsaquo;</a>';
+        t += '<a href="#" id="' + carousel_id + '-control-next" class="psgallery-control-next">&rsaquo;</a>';
         t += '</div>';
         return t;
     }
 
-    function render_gallery(el, photoset) {
-        console.log(photoset);
+    function idstring(gallery_id, string) {
+        // a jquery id selector to access part of the above template.
+        return '#' + gallery_id + '-' + string;
+    }
+
+    function render_gallery(gallery_id, el, photoset) {
+        //console.log(photoset);
 
         var title = photoset.title;
         //console.log("title: "+ title);
@@ -53,40 +59,39 @@
             });
         });
 
-        //console.log("pictures: ");
-        //console.log(pictures);
+        // console.log("pictures: ");
+        // console.log(pictures);
 
-        $(el).html(template_carousel());
+        $(el).html(template_carousel(gallery_id));
 
-        var jcarousel = $('.jcarousel').jcarousel();
+        var jcarousel = $(idstring(gallery_id, 'gallery')).jcarousel();
 
-        $('.jcarousel-control-prev')
-            .on('jcarouselcontrol:active', function() {
+        $(idstring(gallery_id, 'control-prev'))
+            .on(idstring(gallery_id, 'control:active'), function() {
                 $(this).removeClass('inactive');
             })
-            .on('jcarouselcontrol:inactive', function() {
+            .on(idstring(gallery_id, 'control:inactive'), function() {
                 $(this).addClass('inactive');
             })
             .jcarouselControl({
                 target: '-=1'
             });
 
-        $('.jcarousel-control-next')
-            .on('jcarouselcontrol:active', function() {
+        $(idstring(gallery_id, 'control-next'))
+            .on(idstring(gallery_id, 'control:active'), function() {
                 $(this).removeClass('inactive');
             })
-            .on('jcarouselcontrol:inactive', function() {
+            .on(idstring(gallery_id, 'control:inactive'), function() {
                 $(this).addClass('inactive');
             })
             .jcarouselControl({
                 target: '+=1'
             });
 
-
         var html = '<ul>';
 
         $.each(pictures, function() {
-            html += '<li><img class="select-large" data-large="' + this.picture + '" src="' + this.thumbnail + '" alt="' + this.title + '"></a></li>';
+            html += '<li><img class="' + gallery_id + '-select-large" data-large="' + this.picture + '" src="' + this.thumbnail + '" alt="' + this.title + '"></a></li>';
         });
 
         html += '</ul>';
@@ -98,27 +103,27 @@
         jcarousel.jcarousel('reload');
 
         // Set the initially selected image from the set:
-        $("#jcarousel-selected-image").attr("src", pictures[0].picture);
-        $("#jcarousel-selected-image").attr("src", pictures[0].picture);
+        $(idstring(gallery_id, 'selected-image')).attr("src", pictures[0].picture);
+        $(idstring(gallery_id, 'source')).attr("title", pictures[0].title);
+        $(idstring(gallery_id, 'source')).attr("href", pictures[0].src);
 
-        $("#jcarousel-source").attr("title", pictures[0].title);
-        $("#jcarousel-source").attr("href", pictures[0].src);
-
-        $(".jcarousel-title").html(title);
+        // Set the gallery's overall title from the flickr photoset:
+        $(idstring(gallery_id, 'title')).html(title);
 
         // Set up the click to change select image:
-        $(".select-large").each(function (index, ele){
+        $('.' + gallery_id + '-select-large').each(function (index, ele){
+            //console.log(index + " : " + ele);
             $(ele).click(function (){
                 var large = $(ele).data("large");
-                //console.log("change pic to: " + large);
-                $("#jcarousel-selected-image").attr("src", large);
-                $("#jcarousel-source").attr("title", pictures[index].title);
-                $("#jcarousel-source").attr("href", pictures[index].src);
+                console.log("change pic to: " + large);
+                $(idstring(gallery_id, 'selected-image')).attr("src", large);
+                $(idstring(gallery_id, 'source')).attr("title", pictures[index].title);
+                $(idstring(gallery_id, 'source')).attr("href", pictures[index].src);
             });
         });
     }
 
-    function display_gallery_for(el, photosetid) {
+    function display_gallery_for(index, el, photosetid) {
         var request = $.ajax({
             url: settings.flickr_api,
             data: {
@@ -132,7 +137,7 @@
 
         request.done(function (response) {
             if (response.hasOwnProperty("photoset")) {
-                render_gallery(el, response.photoset);
+                render_gallery(index, el, response.photoset);
             } else {
                 alert("no photoset found in response!");
             }
@@ -148,14 +153,16 @@
             $.extend(settings, options);
         }
 
-        $(".photoset-gallery").each(function (index, el){
+        // For each gallery attempt to recover and display the requested flickr
+        // photoset.
+        $(".psgallery-set").each(function (index, el){
             var photosetid = $(el).data("photoset");
             if (!photosetid) {
                 alert("missing data-photoset found on: "+ el);
                 return;
             }
             //console.log("photoset to recover: "+photosetid);
-            display_gallery_for($(el), photosetid);
+            display_gallery_for(index, $(el), photosetid);
         });
 
     }

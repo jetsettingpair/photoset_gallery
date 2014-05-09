@@ -11,7 +11,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <style>
-.jcarousel-wrapper, .controls {
+.psgallery-wrapper, .controls {
     margin: 20px auto;
     position: relative;
     border: 10px solid #fff;
@@ -26,12 +26,12 @@
 
 /** Carousel **/
 
-.jcarousel {
+.psgallery {
     position: relative;
     overflow: hidden;
 }
 
-.jcarousel ul {
+.psgallery ul {
     width: 20000em;
     position: relative;
     list-style: none;
@@ -39,39 +39,40 @@
     padding: 0;
 }
 
-.jcarousel li {
+.psgallery li {
     float: left;
     margin-right: 1px;
 }
 
-.jcarousel img {
+.psgallery img {
     max-height: 200px;
+    width: 100%;
 }
 
-.jcarousel .loading {
+.psgallery .loading {
     text-align: center;
     line-height: 90px; /* Fake vertical aligning */
 }
 
-.jcarousel-source {
-
+.psgallery-source {
 }
 
-.jcarousel-title {
+.psgallery-title {
     font-weight: bold;
     font-size: larger;
     text-align: center;
     padding: 4px;
 }
 
-#jcarousel-selected-image {
+.psgallery-selected-image {
+    margin: 0 auto;
     width: 100%;
 }
 
 /** Carousel Controls **/
 
-.jcarousel-control-prev,
-.jcarousel-control-next {
+.psgallery-control-prev,
+.psgallery-control-next {
     position: absolute;
     bottom: 70px;
     width: 30px;
@@ -90,21 +91,21 @@
     box-shadow: 0 0 2px #999;
 }
 
-.jcarousel-control-prev {
+.psgallery-control-prev {
     left: -50px;
 }
 
-.jcarousel-control-next {
+.psgallery-control-next {
     right: -50px;
 }
 
-.jcarousel-control-prev:hover span,
-.jcarousel-control-next:hover span {
+.psgallery-control-prev:hover span,
+.psgallery-control-next:hover span {
     display: block;
 }
 
-.jcarousel-control-prev.inactive,
-.jcarousel-control-next.inactive {
+.psgallery-control-prev.inactive,
+.psgallery-control-next.inactive {
     opacity: .5;
     cursor: default;
 }
@@ -121,24 +122,22 @@
             <input id="display-photoset-btn" type="button" value="Display"/>
         </div>
 
-        <div class="photoset-gallery" data-photoset="72157606132043161"></div>
+        <div class="psgallery-set" data-photoset="72157602319380691"></div>
+
+        <div class="psgallery-set" data-photoset="72157606132043161"></div-->
 
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/jcarousel/0.3.1/jquery.jcarousel.min.js"></script>
         <script src="js/jquery.photoset.gallery.js"></script>
         <script>
             $(document).ready(function () {
-
                 $("#display-photoset-btn").click(function(){
                     var api_key = $("#api_key").val()
                     var photoset_id = $("#photoset_id").val()
-                    console.log("api_key: " + api_key + " photoset_id: " + photoset_id);
-
                     if (!api_key) {
                         alert("Please enter an api key.");
                         return;
                     }
-
                     $.photoset.gallery.init({
                         api_key: api_key
                     });
